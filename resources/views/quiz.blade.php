@@ -1,0 +1,6 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Quiz - KotobaNest</title>@vite(['resources/css/app.css','resources/js/app.js'])</head>
+<body class="kb-body"><header class="kb-nav"><a href="/" class="kb-logo"><span>あ</span>KotobaNest</a><nav class="kb-links"><a href="/">Home</a><a href="{{ route('lessons.index') }}">Lessons</a><a href="{{ route('quiz') }}">Quiz</a>@auth<a class="kb-login" href="{{ route('dashboard') }}">Dashboard</a>@else<a class="kb-login" href="{{ route('login') }}">Login</a>@endauth</nav></header>
+<main class="kb-section"><div class="kb-title"><p class="kb-badge">Daily Quiz</p><h2>Practice Japanese</h2></div><div class="kb-quiz-box"><h3>What does ありがとう mean?</h3><button onclick="answerQuiz(this,true)">Thank you</button><button onclick="answerQuiz(this,false)">Good morning</button><button onclick="answerQuiz(this,false)">Goodbye</button><p id="quizResult"></p></div></main>
+<script>function answerQuiz(button,correct){document.querySelectorAll('.kb-quiz-box button').forEach(btn=>btn.disabled=true);if(correct){button.classList.add('kb-correct');document.getElementById('quizResult').textContent='Correct!'}else{button.classList.add('kb-wrong');document.getElementById('quizResult').textContent='Wrong. Correct answer is Thank you.'}}</script>
+</body></html>

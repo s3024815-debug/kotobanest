@@ -1,0 +1,10 @@
+.kb-vocab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.kb-vocab-card{background:white;border:1px solid var(--border);border-radius:28px;padding:28px;box-shadow:0 16px 38px rgba(17,24,39,.05)}
+.kb-vocab-top{display:flex;justify-content:space-between;gap:10px;margin-bottom:18px}
+.kb-level{background:#dbeafe;color:#1d4ed8;border-radius:999px;padding:6px 10px;font-weight:900;font-size:.78rem}
+.kb-category{background:#fdf2f8;color:#be185d;border-radius:999px;padding:6px 10px;font-weight:900;font-size:.78rem}
+.kb-vocab-card h3{font-family:'Noto Sans JP';color:var(--dark);font-size:3rem;line-height:1;margin:0 0 10px}
+.kb-furigana{color:var(--blue);font-weight:900;margin-bottom:18px}
+.kb-meaning{color:var(--text);margin:8px 0}
+.kb-example-box{margin-top:18px;background:var(--soft);border:1px solid var(--border);border-radius:18px;padding:16px;font-family:'Noto Sans JP';color:var(--dark)}
+@media(max-width:900px){.kb-vocab-grid{grid-template-columns:1fr}}

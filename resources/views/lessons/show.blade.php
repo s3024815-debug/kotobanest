@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>{{ $lesson->title }} - KotobaNest</title>@vite(['resources/css/app.css','resources/js/app.js'])</head>
+<body class="kb-body"><header class="kb-nav"><a href="/" class="kb-logo"><span>あ</span>KotobaNest</a><nav class="kb-links"><a href="/">Home</a><a href="{{ route('lessons.index') }}">Lessons</a><a href="{{ route('quiz') }}">Quiz</a>@auth<a class="kb-login" href="{{ route('dashboard') }}">Dashboard</a>@else<a class="kb-login" href="{{ route('login') }}">Login</a>@endauth</nav></header>
+<main class="kb-lesson-wrap"><article class="kb-lesson"><p class="kb-badge">{{ $lesson->category }} • {{ $lesson->level }}</p><h1>{{ $lesson->title }}</h1><div class="kb-lesson-content">{!! nl2br(e($lesson->content)) !!}</div><a class="kb-btn kb-secondary" href="{{ route('lessons.index') }}">← Back to Lessons</a></article></main>
+<footer class="kb-footer">© 2026 KotobaNest.</footer></body></html>

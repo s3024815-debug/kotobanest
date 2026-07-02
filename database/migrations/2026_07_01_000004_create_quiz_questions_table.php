@@ -1,0 +1,3 @@
+<?php
+use Illuminate\Database\Migrations\Migration; use Illuminate\Database\Schema\Blueprint; use Illuminate\Support\Facades\Schema;
+return new class extends Migration{public function up(): void{Schema::create('quiz_questions', function (Blueprint $table) {$table->id();$table->string('question');$table->string('choice_a');$table->string('choice_b');$table->string('choice_c');$table->string('choice_d')->nullable();$table->string('correct_choice');$table->text('explanation')->nullable();$table->string('level')->default('N5');$table->string('category')->default('Vocabulary');$table->string('status')->default('published');$table->timestamps();});} public function down(): void{Schema::dropIfExists('quiz_questions');}};
