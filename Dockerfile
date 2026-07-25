@@ -10,6 +10,7 @@ ENV REAL_IP_HEADER=1
 
 RUN composer install --no-dev --optimize-autoloader
 
+RUN apk add --no-cache nodejs npm
 RUN npm install && npm run build
 
 RUN php artisan config:clear
