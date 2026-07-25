@@ -1,0 +1,12 @@
+In app/Models/User.php, add these fields to the existing $fillable array:
+
+'username', 'role', 'status', 'country', 'native_language',
+'current_jlpt', 'avatar', 'bio', 'xp', 'streak', 'last_login_at'
+
+Also add to casts():
+
+'last_login_at' => 'datetime',
+'xp' => 'integer',
+'streak' => 'integer',
+
+Do not remove the existing name, email and password fields.

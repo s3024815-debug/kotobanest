@@ -22,6 +22,19 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'username',
+        'role',
+        'status',
+        'country',
+        'native_language',
+        'current_jlpt',
+        'avatar',
+        'bio',
+        'xp',
+        'streak',
+        'last_login_at',
+        'placement_test_completed_at',
+        'placement_test_result',
     ];
 
     /**
@@ -44,6 +57,10 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'last_login_at' => 'datetime',
+            'placement_test_completed_at' => 'datetime',
+            'xp' => 'integer',
+            'streak' => 'integer',
         ];
     }
 }

@@ -14,10 +14,11 @@
         </a>
 
         <nav class="kb-links">
+            <a href="{{ route('courses.index') }}">Courses</a>
             <a href="{{ route('lessons.index') }}">Lessons</a>
+            <a href="{{ route('dictionary.index') }}">Dictionary</a>
             <a href="{{ route('quiz') }}">Quiz</a>
-            <a href="#path">JLPT</a>
-            <a href="#features">Features</a>
+            <a href="{{ route('premium') }}">Pricing</a>
             @auth
                 <a class="kb-login" href="{{ route('dashboard') }}">Dashboard</a>
             @else
@@ -34,24 +35,24 @@
 
             <div class="kb-hero-copy">
                 <p class="kb-badge">日本語をやさしく学ぼう</p>
-                <h1>Learn Japanese smarter, faster, and beautifully.</h1>
+                <h1>Master Japanese with confidence.</h1>
                 <p class="kb-lead">
-                    KotobaNest helps you learn Japanese from zero to JLPT with lessons, vocabulary, kanji, quizzes, and AI-ready practice.
+                    From hiragana to real grammar, vocabulary, and kanji — KotobaNest helps you build a real N5–N4 foundation with structured, honest content. No filler, no fake lessons.
                 </p>
 
                 <div class="kb-actions">
                     @auth
                         <a class="kb-btn kb-primary" href="{{ route('dashboard') }}">Continue Learning</a>
                     @else
-                        <a class="kb-btn kb-primary" href="{{ route('register') }}">Start Learning Free</a>
+                        <a class="kb-btn kb-primary" href="{{ route('register') }}">Start Learning Free →</a>
                     @endauth
-                    <a class="kb-btn kb-secondary" href="{{ route('quiz') }}">Try Daily Quiz</a>
+                    <a class="kb-btn kb-secondary" href="{{ route('placement-test.index') }}">Take a Level Test</a>
                 </div>
 
                 <div class="kb-trust-row">
-                    <div><strong>12,500+</strong><span>Learners goal</span></div>
                     <div><strong>N5 → N1</strong><span>JLPT roadmap</span></div>
-                    <div><strong>AI Ready</strong><span>Future teacher</span></div>
+                    <div><strong>3 min</strong><span>Free level test</span></div>
+                    <div><strong>Real content</strong><span>No filler lessons</span></div>
                 </div>
             </div>
 
@@ -73,81 +74,97 @@
                 <div class="kb-floating-card card-two">
                     <span>漢字</span>
                     <b>Kanji</b>
-                    <small>Meaning, reading, usage</small>
+                    <small>Meaning, reading, stroke order</small>
                 </div>
             </div>
         </section>
 
+        <section class="kb-section">
+            <div class="kb-feature-row">
+                <div>
+                    <div class="kb-feature-icon" style="background:#fee2e2;">📖</div>
+                    <h4>Structured Curriculum</h4>
+                    <p>Lessons organized by level, unlocked one at a time.</p>
+                </div>
+                <div>
+                    <div class="kb-feature-icon" style="background:#dcfce7;">辞</div>
+                    <h4>Live Dictionary</h4>
+                    <p>Instant lookup with thousands of real entries.</p>
+                </div>
+                <div>
+                    <div class="kb-feature-icon" style="background:#ede9fe;">漢</div>
+                    <h4>Kanji + Stroke Order</h4>
+                    <p>Meaning, readings, and how to write each kanji.</p>
+                </div>
+                <div>
+                    <div class="kb-feature-icon" style="background:#fef3c7;">📈</div>
+                    <h4>Track Your Progress</h4>
+                    <p>XP, streaks, and course completion — all real.</p>
+                </div>
+            </div>
+        </section>
+
+        @if ($continue)
+            <section class="kb-section">
+                <div class="kb-title" style="text-align:left;margin-bottom:1rem;">
+                    <p class="kb-badge">Continue Your Journey</p>
+                    <h2 style="font-size:1.6rem;">Pick up where you left off</h2>
+                </div>
+                <div class="kb-continue-card">
+                    <div class="kb-continue-thumb">{{ $continue['course']->level }}</div>
+                    <div style="flex:1;min-width:0;">
+                        <span class="kb-badge" style="margin:0 0 4px;">In Progress</span>
+                        <p style="font-weight:800;margin:2px 0;">{{ $continue['lesson']->title }}</p>
+                        <p style="color:var(--muted);font-size:.85rem;margin:0 0 6px;">{{ $continue['lesson']->category }}</p>
+                        <div style="height:6px;background:var(--border);border-radius:99px;overflow:hidden;max-width:220px;">
+                            <div style="height:100%;background:var(--blue);width:{{ $continue['percent'] }}%"></div>
+                        </div>
+                    </div>
+                    <a class="kb-btn kb-primary" href="{{ route('lessons.show', $continue['lesson']) }}">Continue</a>
+                </div>
+            </section>
+        @endif
+
         <section class="kb-section" id="path">
             <div class="kb-title">
-                <p class="kb-badge">JLPT Learning Path</p>
-                <h2>Move step by step from beginner to advanced</h2>
+                <p class="kb-badge">Find Your Path</p>
+                <h2>Courses crafted for every JLPT level</h2>
             </div>
 
-            <div class="kb-path">
-                <div><b>N5</b><span>First step</span></div>
-                <div><b>N4</b><span>Daily basics</span></div>
-                <div><b>N3</b><span>Intermediate</span></div>
-                <div><b>N2</b><span>Advanced</span></div>
-                <div><b>N1</b><span>Mastery</span></div>
-            </div>
-        </section>
-
-        <section class="kb-section">
-            <div class="kb-title">
-                <p class="kb-badge">Popular Lessons</p>
-                <h2>Choose how you want to learn today</h2>
-            </div>
-
-            <div class="kb-grid">
-                <a class="kb-card" href="{{ route('lessons.index') }}?category=Grammar">
-                    <span>文</span>
-                    <h3>Grammar</h3>
-                    <p>Simple explanations for particles, sentence patterns, and JLPT grammar.</p>
-                </a>
-                <a class="kb-card" href="{{ route('lessons.index') }}?category=Vocabulary">
-                    <span>語</span>
-                    <h3>Vocabulary</h3>
-                    <p>Daily useful words with reading, meaning, and example sentences.</p>
-                </a>
-                <a class="kb-card" href="{{ route('lessons.index') }}?category=Kanji">
-                    <span>漢</span>
-                    <h3>Kanji</h3>
-                    <p>Learn kanji with meaning, onyomi, kunyomi, and practice examples.</p>
-                </a>
-                <a class="kb-card" href="{{ route('quiz') }}">
-                    <span>Q</span>
-                    <h3>Daily Quiz</h3>
-                    <p>Practice quickly every day and build your learning streak.</p>
-                </a>
-                <a class="kb-card" href="{{ route('lessons.index') }}?category=Conversation">
-                    <span>会</span>
-                    <h3>Conversation</h3>
-                    <p>Useful Japanese phrases for school, job, shopping, and daily life.</p>
-                </a>
-                <a class="kb-card" href="{{ route('lessons.index') }}?category=Japan Life">
-                    <span>🇯🇵</span>
-                    <h3>Japan Life</h3>
-                    <p>Japanese for konbini, station, university, part-time jobs, and documents.</p>
+            <div class="kb-grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr));">
+                @foreach ($courses as $c)
+                    <a class="kb-course-card" href="{{ route('courses.show', $c['course']) }}">
+                        <div class="kb-course-banner" style="background:linear-gradient(135deg,var(--blue),var(--violet));">
+                            <span class="kb-course-tag">{{ $c['course']->level }}</span>
+                        </div>
+                        <div class="kb-course-body">
+                            <h3>{{ $c['course']->title }}</h3>
+                            <p>{{ $c['course']->description }}</p>
+                            <div class="kb-course-meta">{{ $c['lessonCount'] }} Lessons</div>
+                        </div>
+                    </a>
+                @endforeach
+                <a class="kb-course-card" href="{{ route('placement-test.index') }}">
+                    <div class="kb-course-banner" style="background:linear-gradient(135deg,#f59e0b,#ec4899);">
+                        <span class="kb-course-tag">Free</span>
+                    </div>
+                    <div class="kb-course-body">
+                        <h3>Not sure where to start?</h3>
+                        <p>Take our 3-minute placement test and get a course recommendation.</p>
+                        <div class="kb-course-meta">12 Questions</div>
+                    </div>
                 </a>
             </div>
         </section>
 
-        <section class="kb-section kb-preview">
-            <div>
-                <p class="kb-badge">Vocabulary Preview</p>
-                <h2>Learn words in a clean, memorable way</h2>
-                <p class="kb-lead">
-                    Vocabulary will become the core of KotobaNest: words, furigana, meaning, examples, favorites, and audio later.
-                </p>
+        <div class="kb-section" style="padding-top:0;">
+            <div class="kb-stats-bar">
+                <div><b>{{ $stats['lessons'] }}</b><span>Real Lessons</span></div>
+                <div><b>{{ $stats['vocabulary'] }}</b><span>Vocabulary Words</span></div>
+                <div><b>{{ $stats['kanji'] }}</b><span>Kanji Covered</span></div>
+                <div><b>{{ $stats['courses'] }}</b><span>Full Courses (N5 & N4)</span></div>
             </div>
-
-            <div class="kb-vocab-list">
-                <div><h3>言葉</h3><p>ことば</p><span>Word / Language</span></div>
-                <div><h3>勉強</h3><p>べんきょう</p><span>Study</span></div>
-                <div><h3>学校</h3><p>がっこう</p><span>School</span></div>
-            </div>
-        </section>
+        </div>
 
         <section class="kb-section" id="features">
             <div class="kb-title">
@@ -156,18 +173,40 @@
             </div>
 
             <div class="kb-feature-grid">
-                <div>✓ Furigana-friendly lessons</div>
-                <div>✓ JLPT-ready structure</div>
+                <div>✓ Furigana-friendly reading lessons</div>
+                <div>✓ JLPT-ready structure, N5 to N1</div>
+                <div>✓ Kanji stroke order (kakikata)</div>
+                <div>✓ Live dictionary with real entries</div>
                 <div>✓ Daily quiz practice</div>
-                <div>✓ Progress tracking ready</div>
-                <div>✓ AI teacher ready</div>
-                <div>✓ Mobile-first design</div>
+                <div>✓ Mobile-friendly design</div>
+            </div>
+        </section>
+
+        <section class="kb-section" id="pricing">
+            <div class="kb-title">
+                <p class="kb-badge">Simple Pricing</p>
+                <h2>Start free. Upgrade when you're ready.</h2>
+            </div>
+
+            <div class="kb-grid" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+                <div class="kb-card" style="cursor:default;">
+                    <span>🎓</span>
+                    <h3>Free</h3>
+                    <p>Full access to N5 & N4 lessons, vocabulary, kanji, quizzes, dictionary, and the placement test.</p>
+                    <p style="font-weight:800;color:var(--dark);font-size:1.4rem;margin-top:.5rem;">৳0</p>
+                </div>
+                <a class="kb-card" href="{{ route('premium') }}" style="border:2px solid var(--violet);">
+                    <span>✨</span>
+                    <h3>Premium <small style="font-weight:600;color:var(--muted);">(Coming Soon)</small></h3>
+                    <p>Full N3–N1 path, downloadable notes, and priority new content as it's released.</p>
+                    <p style="font-weight:800;color:var(--dark);font-size:1.4rem;margin-top:.5rem;">Price TBA</p>
+                </a>
             </div>
         </section>
 
         <section class="kb-cta-v2">
             <h2>Start your Japanese journey today.</h2>
-            <p>KotobaNest is your home for lessons, vocabulary, kanji, quizzes, and Japan life learning.</p>
+            <p>KotobaNest is your home for lessons, vocabulary, kanji, quizzes, and a live dictionary.</p>
             @auth
                 <a class="kb-btn kb-white" href="{{ route('dashboard') }}">Open Dashboard</a>
             @else
@@ -182,7 +221,9 @@
             <p>Your Home for Japanese Learning.</p>
         </div>
         <div class="kb-footer-links">
+            <a href="{{ route('courses.index') }}">Courses</a>
             <a href="{{ route('lessons.index') }}">Lessons</a>
+            <a href="{{ route('dictionary.index') }}">Dictionary</a>
             <a href="{{ route('quiz') }}">Quiz</a>
             <a href="{{ route('login') }}">Login</a>
         </div>

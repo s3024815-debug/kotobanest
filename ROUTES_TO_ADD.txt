@@ -1,0 +1,6 @@
+Add these four GET routes immediately after the existing /admin/curriculum route:
+
+Route::get('/admin/curriculum/courses/{course}', [AdminCurriculumController::class, 'showCourse'])->name('admin.curriculum.courses.show');
+Route::get('/admin/curriculum/sections/{section}', [AdminCurriculumController::class, 'showSection'])->name('admin.curriculum.sections.show');
+Route::get('/admin/curriculum/modules/{module}', [AdminCurriculumController::class, 'showModule'])->name('admin.curriculum.modules.show');
+Route::get('/admin/curriculum/lessons/{lesson}/edit', [AdminCurriculumController::class, 'editLesson'])->name('admin.curriculum.lessons.edit');

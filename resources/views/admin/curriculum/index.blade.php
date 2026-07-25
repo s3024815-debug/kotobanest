@@ -1,0 +1,10 @@
+<x-app-layout><div class="kb-shell">@include('admin.curriculum._styles')<div class="kb-wrap">
+<div class="kb-top"><div><div class="kb-title">Curriculum Manager</div><div class="kb-muted">Choose one course. Sections, modules and lessons stay on separate pages.</div></div>
+<form class="kb-search" method="GET"><input class="kb-input" name="q" value="{{ $search }}" placeholder="Search course or JLPT level"><button class="kb-btn kb-dark">Search</button></form></div>
+@include('admin.curriculum._flash')
+<details class="kb-card kb-pad kb-modal"><summary class="kb-btn kb-primary">＋ Create new course</summary><form method="POST" action="{{ route('admin.curriculum.courses.store') }}" class="kb-form-grid" style="margin-top:16px">@csrf
+<input class="kb-input" name="title" required placeholder="JLPT N5 Complete Course"><input class="kb-input" name="level" required placeholder="N5"><input class="kb-input" name="description" placeholder="Course description"><label><input type="checkbox" name="is_published" value="1" checked> Published</label><button class="kb-btn kb-primary" style="grid-column:1/-1">Create Course</button></form></details>
+<div class="kb-grid">@forelse($courses as $course)<article class="kb-card kb-item"><div class="kb-row"><div class="kb-icon">🇯🇵</div><span class="kb-badge {{ $course->is_published ? 'kb-published':'kb-draft' }}">{{ $course->is_published ? 'Published':'Draft' }}</span></div>
+<h2 style="font-size:20px;font-weight:900;margin:14px 0 5px">{{ $course->title }}</h2><div class="kb-muted">{{ $course->level }} · {{ $course->description ?: 'No description' }}</div><div class="kb-stat" style="margin:16px 0">{{ $course->sections_count }} sections · {{ $course->modules_count }} modules · {{ $course->lessons_count }} lessons</div>
+<div class="kb-row"><div class="kb-actions">@include('admin.curriculum._move',['type'=>'course','id'=>$course->id])</div><a class="kb-btn kb-primary" href="{{ route('admin.curriculum.courses.show',$course) }}">Open →</a></div></article>@empty<div class="kb-card kb-empty" style="grid-column:1/-1"><h3>No courses found</h3></div>@endforelse</div>
+</div></div></x-app-layout>
